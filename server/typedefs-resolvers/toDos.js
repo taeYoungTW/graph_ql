@@ -3,7 +3,7 @@ import { jsonFileFunc } from './_utils.js';
 
 const { getJSON, setJSON } = jsonFileFunc({
     metaUrl: import.meta.url,
-    relativePath: '../todos.json',
+    relativePath: '..//jsons/todos.json',
 });
 
 const typeDefs = gql`
