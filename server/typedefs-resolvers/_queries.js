@@ -6,6 +6,7 @@ const typeDefs = gql`
         toDos: [Todo]
         toDo(id: ID!): Todo
         date(time: Date): String
+        videos: [Video]
     }
 `;
 
