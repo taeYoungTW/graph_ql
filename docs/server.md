@@ -28,7 +28,7 @@ npm install apollo-server graphql nodemon
 -   `typeDef` :
     -   GraphQL 명세에서 사용될 데이터, 요청의 타입 지정
     -   gql(template literal tag)로 생성됨
-    -   [활용되는 타입은 여러가지가 있습니다.](./types.md)
+    -   [활용되는 타입은 여러가지가 있다.](./types.md)
 
 ```js
 import { ApolloServer, gql } from 'apollo-server';
