@@ -10,6 +10,7 @@
         "server": "nodemon ./server/index.js"
     },
     "dependencies": {
+        "@apollo/client": "^3.6.9",
         "apollo-server": "^3.10.2",
         "graphql": "^16.6.0",
         "nodemon": "^2.0.20",
