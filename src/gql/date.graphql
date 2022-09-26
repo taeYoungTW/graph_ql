@@ -1,0 +1,6 @@
+query GetDateFromNumber($time: Date!) {
+    date(time: $time) {
+        client
+        server
+    }
+}

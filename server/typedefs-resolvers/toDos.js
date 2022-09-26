@@ -8,10 +8,10 @@ const { getJSON, setJSON } = jsonFileFunc({
 
 const typeDefs = gql`
     type Todo {
-        userId: Int
-        id: ID
-        title: String
-        completed: Boolean
+        userId: Int!
+        id: ID!
+        title: String!
+        completed: Boolean!
     }
 `;
 
@@ -23,6 +23,13 @@ const resolvers = {
         },
     },
     Mutation: {
+        sortTodo: () => {
+            const sortedTodos = getJSON().sort(
+                (cur, next) => +next.id - +cur.id
+            );
+            setJSON(sortedTodos);
+            return sortedTodos;
+        },
         deleteTodo: (parent, args, context, info) => {
             let result = null;
 
@@ -40,14 +47,14 @@ const resolvers = {
         },
         insertTodo: (parent, args) => {
             const toDos = getJSON();
-            const { userId, id } = toDos[toDos.length - 1];
+            const { userId, id } = toDos[0];
             const todoToInsert = {
                 userId: +userId + 1,
                 id: +id + 1,
                 ...args,
                 completed: false,
             };
-            setJSON([...toDos, todoToInsert]);
+            setJSON([todoToInsert, ...toDos]);
             return todoToInsert;
         },
         editTodo: (parent, args) => {

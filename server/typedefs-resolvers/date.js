@@ -26,13 +26,21 @@ const dateScalar = new GraphQLScalarType({
 
 const typeDefs = gql`
     scalar Date
+
+    type Dates {
+        server: String!
+        client: String!
+    }
 `;
 
 const resolvers = {
     Date: dateScalar,
     Query: {
         date: (parent, args, context, info) => {
-            return `${args.time.toLocaleString('ko')}`;
+            return {
+                server: new Date().toLocaleString('ko'),
+                client: `${args.time.toLocaleString('ko')}`,
+            };
         },
     },
 };

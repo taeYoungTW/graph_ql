@@ -1,0 +1,17 @@
+query GetToDos {
+    toDos {
+        completed
+        id
+        title
+        userId
+    }
+}
+
+mutation addTodo($title: String) {
+    insertTodo(title: $title) {
+        completed
+        id
+        title
+        userId
+    }
+}

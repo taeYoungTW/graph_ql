@@ -3,10 +3,11 @@ import { gql } from 'apollo-server';
 const typeDefs = gql`
     type Query {
         books: [Book]
-        toDos: [Todo]
+        toDos: [Todo!]!
         toDo(id: ID!): Todo
-        date(time: Date): String
+        date(time: Date!): Dates!
         videos: [Video]
+        video(id: ID!): Video
     }
 `;
 
