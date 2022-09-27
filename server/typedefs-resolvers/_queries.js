@@ -8,6 +8,7 @@ const typeDefs = gql`
         date(time: Date!): Dates!
         videos: [Video]
         video(id: ID!): Video
+        characters: [Character]
     }
 `;
 

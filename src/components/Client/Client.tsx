@@ -2,6 +2,7 @@ import { useState } from 'react';
 import {
     GetToDosDocument,
     useAddTodoMutation,
+    useGetCharactersQuery,
     useGetToDosQuery,
 } from '../../generated/graphql';
 // import { useToDosQuery, useAddTodoMutation } from '../../gqlHooks/todo';
@@ -14,8 +15,12 @@ const Client = () => {
     // 코드 생성기를 활용한 hook
     const { data, loading, error } = useGetToDosQuery();
     const [isOpenJSON, setIsOpenJSON] = useState(false);
+    const { data: _data } = useGetCharactersQuery();
     return (
         <>
+            {_data?.characters?.map((character) => (
+                <div>{character?.__typename}</div>
+            ))}
             <AddTodo />
             <div
                 style={{

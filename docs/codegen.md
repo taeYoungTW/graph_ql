@@ -84,3 +84,103 @@ const Posts = () => {
 -   Resolver 함수 타입 [시그니처](https://developer.mozilla.org/ko/docs/Glossary/Signature/Function)의 오타
 
 따라서, GraphQL Code Generator는 resolvers의 타입을 자동으로 생성할 수 있도록 도와주는 다수의 플러그인들을 제공한다.
+
+> 이 글에서 백엔드 관련 코드 생성기는 실습하지 않는다. 프론트엔드를 타겟으로 하고 있다.
+
+## 프론트엔드 코드 생성해보기
+
+### 설치
+
+```
+npm install graphql
+npm install -D @graphql-codegen/cli
+```
+
+### 설정
+
+수동 설정과 자동 설정이 존재하는데 이 글에서는 자동 설정을 시도한다.
+아래와 같이 실행하면 초기화 마법사가 실행된다.
+
+```
+npx graphql-code-generator init
+npm install # install the chosen plugins
+```
+
+#### 설정1) What type of application are you building?
+
+사용하고자 하는 용도를 선택하면 된다. 백엔드 또는 프론트엔드
+프론트엔드라면 React, Stencil, Angular 등을 옵션에서 선택할 수 있다.
+
+```
+ npx graphql-code-generator init
+
+    Welcome to GraphQL Code Generator!
+    Answer few questions and we will setup everything for you.
+
+? What type of application are you building? (Press <space> to select, <a> to toggle all, <i> to invert selection, and <enter> to proceed)
+>( ) Backend - API or server
+ ( ) Application built with Angular
+ (*) Application built with React
+ ( ) Application built with Stencil
+ ( ) Application built with other framework or vanilla JS
+```
+
+### 설정2) Where is your schema?
+
+스키마 위치를 설정한다. path 또는 url을 넣을 수 있는데, 백엔드가 스키마를 파일로 주면 path로 서버가 돌아가고 있으면 서버 url을 넣으면 된다.
+
+이 글에서는 Apollo Sever가 있기 때문에 서버 url인 `http://localhost:4000`으로 설정하였다.
+
+### 설정3) Where are your operations and fragments?
+
+프론트엔드에서 요청하는 작업을 작성한 Document 위치를 지정해야한다.
+Document는 Mutation, Query 등을 작성한 것을 말한다.
+이 글에서는 `src/gql` 경로에 존재하는데, Document의 경우 graphql 확장자를 가지기 때문에 기본으로 설정된 `src/**/*.graphql`을 활용해도 문제는 없다.
+
+```gql
+# src/gql/toDo.graphql
+query GetToDos {
+    toDos {
+        completed
+        id
+        title
+        userId
+    }
+}
+
+mutation addTodo($title: String) {
+    insertTodo(title: $title) {
+        completed
+        id
+        title
+        userId
+    }
+}
+```
+
+### 설정4) Pick plugins
+
+```
+? Pick plugins: (Press <space> to select, <a> to toggle all, <i> to invert selection, and <enter> to proceed)
+>(*) TypeScript (required by other typescript plugins)
+ (*) TypeScript Operations (operations and fragments)
+ (*) TypeScript React Apollo (typed components and HOCs)
+ ( ) TypeScript GraphQL files modules (declarations for .graphql files)
+ ( ) TypeScript GraphQL document nodes (embedded GraphQL document)
+ ( ) Introspection Fragment Matcher (for Apollo Client)
+ ( ) Urql Introspection (for Urql Client)
+```
+
+### 설정5) ? Where to write the output
+
+`src/generated/graphql.tsx`
+
+### 설정6) Do you want to generate an introspection file?
+
+### 설정7) How to name the config file?
+
+`codegen.yml`
+
+### 설정8) What script in package.json should run the codegen?
+
+`gen`

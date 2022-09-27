@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "name": "ironman",
+        "friends": ["hulk", "Nicholas Joseph Fury"],
+        "power": 8
+    },
+    {
+        "id": 2,
+        "name": "hulk",
+        "friends": ["ironman"],
+        "power": 9
+    },
+    {
+        "id": 3,
+        "name": "Phillip J. Coulson",
+        "friends": ["ironman"],
+        "job": "agent"
+    },
+    {
+        "id": 4,
+        "name": "Nicholas Joseph Fury",
+        "friends": ["Phillip J. Coulson", "ironman", "hulk"],
+        "job": "agent"
+    },
+    {
+        "id": 5,
+        "name": "Thor Odinson",
+        "friends": ["ironman", "hulk"],
+        "power": 9
+    }
+]

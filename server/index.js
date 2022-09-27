@@ -5,6 +5,7 @@ import books from './typedefs-resolvers/books.js';
 import toDos from './typedefs-resolvers/toDos.js';
 import date from './typedefs-resolvers/date.js';
 import _enum from './typedefs-resolvers/enum.js';
+import _interface from './typedefs-resolvers/interface.js';
 
 const typeDefs = [
     queries,
@@ -13,6 +14,7 @@ const typeDefs = [
     toDos.typeDefs,
     date.typeDefs,
     _enum.typeDefs,
+    _interface.typeDefs,
 ];
 
 const resolvers = [
@@ -20,6 +22,7 @@ const resolvers = [
     toDos.resolvers,
     date.resolvers,
     _enum.resolvers,
+    _interface.resolvers,
 ];
 
 const server = new ApolloServer({

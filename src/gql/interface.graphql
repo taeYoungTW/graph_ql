@@ -1,0 +1,13 @@
+query GetCharacters {
+    characters {
+        id
+        name
+        ... on Hero {
+            power
+        }
+        ... on Human {
+            job
+        }
+        friends
+    }
+}

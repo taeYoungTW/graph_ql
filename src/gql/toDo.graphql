@@ -15,3 +15,19 @@ mutation addTodo($title: String) {
         userId
     }
 }
+
+query GetLastToDo {
+    firstToDo: toDo(id: 1) {
+        ...toDoField
+    }
+    secondToDo: toDo(id: 2) {
+        ...toDoField
+    }
+}
+
+fragment toDoField on Todo {
+    completed
+    id
+    title
+    userId
+}
