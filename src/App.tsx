@@ -2,8 +2,11 @@ import reactLogo from './assets/react.svg';
 import './App.css';
 import Client from './components/Client';
 import _Date from './components/Date';
+import GlobalState from './components/GlobalState';
+import { useState } from 'react';
 
 function App() {
+    const [isOpen, setIsOpen] = useState(true);
     return (
         <div>
             <div>
@@ -19,6 +22,8 @@ function App() {
                 </a>
             </div>
             <h1>Vite + React + GraphQL(ApolloClient)</h1>
+            {isOpen && <GlobalState />}
+            <button onClick={() => setIsOpen((prev) => !prev)}>toggle</button>
             <_Date />
             <div className="card">
                 <Client />

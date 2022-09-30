@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
 import generatedIntrospection from './generated/graphql';
+import { timeStore } from './store/time';
 
 const client = new ApolloClient({
     uri: 'http://localhost:4000/',
