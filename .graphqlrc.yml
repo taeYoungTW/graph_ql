@@ -1,0 +1,3 @@
+# .graphqlrc.yml
+schema: 'http://localhost:4000'
+documents: './src/**/*.{graphql,js,ts,jsx,tsx}'
