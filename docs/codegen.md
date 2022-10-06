@@ -1,23 +1,24 @@
-- [GraphQL 코드 생성기](#graphql-코드-생성기)
-  - [소개](#소개)
-  - [프론트엔드](#프론트엔드)
-    - [수동 작업의 문제 (프론트엔드)](#수동-작업의-문제-프론트엔드)
-    - [자동 생성의 장점 (프론트엔드)](#자동-생성의-장점-프론트엔드)
-  - [백엔드](#백엔드)
-  - [프론트엔드 코드 생성해보기](#프론트엔드-코드-생성해보기)
-    - [설치](#설치)
-    - [설정](#설정)
-      - [설정1: What type of application are you building?](#설정1-what-type-of-application-are-you-building)
-      - [설정2: Where is your schema?](#설정2-where-is-your-schema)
-      - [설정3: Where are your operations and fragments?](#설정3-where-are-your-operations-and-fragments)
-      - [설정4: Pick plugins](#설정4-pick-plugins)
-      - [설정5: Where to write the output](#설정5-where-to-write-the-output)
-      - [설정6: Do you want to generate an introspection file?](#설정6-do-you-want-to-generate-an-introspection-file)
-      - [설정7: How to name the config file?](#설정7-how-to-name-the-config-file)
-      - [설정8: What script in package.json should run the codegen?](#설정8-what-script-in-packagejson-should-run-the-codegen)
-  - [생성된 코드 확인](#생성된-코드-확인)
-- [이동](#이동)
-  - [다음 문서](#다음-문서)
+-   [GraphQL 코드 생성기](#graphql-코드-생성기)
+    -   [소개](#소개)
+    -   [프론트엔드](#프론트엔드)
+        -   [수동 작업의 문제 (프론트엔드)](#수동-작업의-문제-프론트엔드)
+        -   [자동 생성의 장점 (프론트엔드)](#자동-생성의-장점-프론트엔드)
+    -   [백엔드](#백엔드)
+    -   [프론트엔드 코드 생성해보기](#프론트엔드-코드-생성해보기)
+        -   [설치](#설치)
+        -   [설정](#설정)
+            -   [설정1: What type of application are you building?](#설정1-what-type-of-application-are-you-building)
+            -   [설정2: Where is your schema?](#설정2-where-is-your-schema)
+            -   [설정3: Where are your operations and fragments?](#설정3-where-are-your-operations-and-fragments)
+            -   [설정4: Pick plugins](#설정4-pick-plugins)
+            -   [설정5: Where to write the output](#설정5-where-to-write-the-output)
+            -   [설정6: Do you want to generate an introspection file?](#설정6-do-you-want-to-generate-an-introspection-file)
+            -   [설정7: How to name the config file?](#설정7-how-to-name-the-config-file)
+            -   [설정8: What script in package.json should run the codegen?](#설정8-what-script-in-packagejson-should-run-the-codegen)
+    -   [생성된 코드 확인](#생성된-코드-확인)
+    -   [다른 방법들](#다른-방법들)
+-   [이동](#이동)
+    -   [다음 문서](#다음-문서)
 
 # GraphQL 코드 생성기
 
@@ -212,8 +213,11 @@ mutation addTodo($title: String) {
 
 -   코드 생성에 대한 스크립트 명령어 설정
     -   `gen`
+-   스크립트에 `--watch` 옵션을 붙여주면, 대상 파일이 수정되는 것을 감지해 실행되도록 할 수 있다.
 
 ## 생성된 코드 확인
+
+-   `npm run server` & `npm run gen`
 
 -   쿼리
 
@@ -308,6 +312,11 @@ const Example = () => {
     return <div>{data}</div>;
 };
 ```
+
+## 다른 방법들
+
+-   CLI 환경으로 구동하는 방식이 아닌, VSCode 또는 CRA, Prettier 등.. 과의 통합된 환경을 구성할 수 있다고 한다. (아직 확인해보진 않았다.)
+    -   [GraphQL Code Generator : integrations](https://www.the-guild.dev/graphql/codegen/docs/integrations/vscode)
 
 # 이동
 
