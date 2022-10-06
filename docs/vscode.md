@@ -1,7 +1,7 @@
-- [VSCode Extension - GraphQL: Language Feature Support](#vscode-extension---graphql-language-feature-support)
-  - [1. 배경](#1-배경)
-  - [2. GraphQL: Language Feature Support](#2-graphql-language-feature-support)
-      - [설정](#설정)
+-   [VSCode Extension - GraphQL: Language Feature Support](#vscode-extension---graphql-language-feature-support)
+    -   [1. 배경](#1-배경)
+    -   [2. GraphQL: Language Feature Support](#2-graphql-language-feature-support)
+        -   [설정](#설정)
 
 # VSCode Extension - GraphQL: Language Feature Support
 
@@ -55,7 +55,9 @@ documents: './src/**/*.{graphql,js,ts,jsx,tsx}'
 -   `VSCode GraphQL: Manual Restart`를 실행
     -   스키마가 달라진 경우, 실행하면 반영된다.
 
-1. 확인
+![](./images/vscode_restart.png)
+
+4. 확인
 
 -   graphql 확장자 파일에서 또는 tsx,ts, js, ts 등과 같은 파일에서 tagged template literal 형식으로 바로 쓰는 경우 모두 지원이 된다.
 -   `ctrl` + `space`를 눌러 자동 완성 추천을 확인해 보자
