@@ -1,3 +1,13 @@
+- [Apollo Client (React)](#apollo-client-react)
+  - [설치](#설치)
+  - [초기화](#초기화)
+  - [쿼리 보내기](#쿼리-보내기)
+      - [주기적으로 요청 보내기](#주기적으로-요청-보내기)
+  - [뮤테이션 보내기](#뮤테이션-보내기)
+- [이동](#이동)
+  - [다음 문서](#다음-문서)
+  - [연관 문서](#연관-문서)
+
 # Apollo Client (React)
 
 참고
@@ -149,6 +159,9 @@ export default _Date;
 
 useMutation의 `refetchQueries`를 지정하여, 뮤테이션이 발생 완료된 후 특정 쿼리를 다시 fetch하게 할 수 있다.
 
+-   여기에서는 컴포넌트에 바로 사용하지 않고, Custom Hook을 만들어 한번 씌워서 사용하였다.
+    -   쿼리가 여러 곳에서 활용될 때, 레이어를 만들어 따로 관리하는 것이 한번에 업데이트하기 좋아 보인다.
+    -   하지만, 하나의 쿼리가 여러 곳에서 활용될지는 의문이다.
 -   여기에서는 투두를 생성 뮤테이션에 투두 리스트를 갱신하는 toDos를 refetch 설정하였다.
 
 ```ts
@@ -181,7 +194,7 @@ export const useAddTodoMutation = () => {
 };
 ```
 
-아래와 같이
+아래와 같이 만들어진 hook을 컴포넌트에서 활용한다.
 
 ```tsx
 const AddTodo = () => {
@@ -216,3 +229,19 @@ const AddTodo = () => {
     );
 };
 ```
+
+<br/>
+<br/>
+
+# 이동
+
+## 다음 문서
+
+-   [Code Generator](./codegen.md)
+
+## 연관 문서
+
+-   [GraphQL Types](./types.md)
+-   [GraphQL Query](./query.md)
+-   [GraphQL Mutation](./mutation.md)
+-   [Apollo Client LocalState](./localState.md)

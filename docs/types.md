@@ -1,6 +1,23 @@
--   참고 : [Graphql korea : 스키마 & 타입](https://graphql-kr.github.io/learn/schema/)
+- [타입 시스템](#타입-시스템)
+  - [GraphQL Schema Language](#graphql-schema-language)
+  - [객체 타입& 필드](#객체-타입-필드)
+  - [인자](#인자)
+  - [쿼리 & 뮤테이션 타입](#쿼리--뮤테이션-타입)
+  - [스칼라 타입](#스칼라-타입)
+  - [커스텀 스칼라 타입](#커스텀-스칼라-타입)
+  - [열거형 타입](#열거형-타입)
+  - [리스트와 Non-null](#리스트와-non-null)
+  - [인터페이스](#인터페이스)
+  - [유니온 타입](#유니온-타입)
+  - [입력 타입](#입력-타입)
+  - [변수](#변수)
+- [이동](#이동)
+  - [다음 문서](#다음-문서)
+  - [연관 문서](#연관-문서)
 
 # 타입 시스템
+
+-   참고 : [Graphql korea : 스키마 & 타입](https://graphql-kr.github.io/learn/schema/)
 
 GraphQL 쿼리 언어의 경우 기본적으로 객체의 필드를 지정해야만 한다.
 객체의 필드의 타입을 지정 함으로서 받아올 데이터의 형식 예측 및 필요한 데이터를 더잘 표현할 수 있기에 스키마가 필요하다.
@@ -12,7 +29,7 @@ GraphQL 쿼리 언어의 경우 기본적으로 객체의 필드를 지정해야
 GraphQL은 언어에 얽매이지 않기 위해 독자적인 간단한 언어를 활용한다.
 이를 GraphQL schema language라고 한다.
 
-# 객체 타입& 필드
+## 객체 타입& 필드
 
 객체 타입 : 서비스에서 가져올 수 있는 객체의 종류와 그 객체의 필드를 나타낸다.
 
@@ -28,7 +45,7 @@ type Character {
 }
 ```
 
-# 인자
+## 인자
 
 필드는 0개 이상의 인수를 가질 수 있다.
 인자는 모두 이름이 있고, 인자 타입과 인자의 기본값을 지정 할 수 있다.
@@ -42,7 +59,7 @@ type Starship {
 }
 ```
 
-# 쿼리 & 뮤테이션 타입
+## 쿼리 & 뮤테이션 타입
 
 -   스키마 대부분이 일반 객체 타입이지만, 스키마 내에는 특수한 타입 쿼리, 뮤테이션 타입이 존재한다.
 -   두 타입의 모든 GraphQL 쿼리의 진입점(entry Point)를 나타낸다. (루트 타입)
@@ -54,7 +71,7 @@ type Query {
 }
 ```
 
-# 스칼라 타입
+## 스칼라 타입
 
 필드의 구체적인 데이터로 표현되기 위한 쿼리의 끝을 나타낸다.
 
@@ -317,3 +334,15 @@ mutation CreateReviewForEpisode($ep: Episode!, $review: ReviewInput!) {
 }
 ``
 ````
+
+# 이동
+
+## 다음 문서
+
+-   [GraphQL Query](./query.md)
+
+## 연관 문서
+
+-   [GraphQL Types](./types.md)
+-   [GraphQL Mutation](./mutation.md)
+-   [Apollo Client LocalState](./localState.md)

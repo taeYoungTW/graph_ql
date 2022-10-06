@@ -1,3 +1,24 @@
+- [GraphQL 코드 생성기](#graphql-코드-생성기)
+  - [소개](#소개)
+  - [프론트엔드](#프론트엔드)
+    - [수동 작업의 문제 (프론트엔드)](#수동-작업의-문제-프론트엔드)
+    - [자동 생성의 장점 (프론트엔드)](#자동-생성의-장점-프론트엔드)
+  - [백엔드](#백엔드)
+  - [프론트엔드 코드 생성해보기](#프론트엔드-코드-생성해보기)
+    - [설치](#설치)
+    - [설정](#설정)
+      - [설정1: What type of application are you building?](#설정1-what-type-of-application-are-you-building)
+      - [설정2: Where is your schema?](#설정2-where-is-your-schema)
+      - [설정3: Where are your operations and fragments?](#설정3-where-are-your-operations-and-fragments)
+      - [설정4: Pick plugins](#설정4-pick-plugins)
+      - [설정5: Where to write the output](#설정5-where-to-write-the-output)
+      - [설정6: Do you want to generate an introspection file?](#설정6-do-you-want-to-generate-an-introspection-file)
+      - [설정7: How to name the config file?](#설정7-how-to-name-the-config-file)
+      - [설정8: What script in package.json should run the codegen?](#설정8-what-script-in-packagejson-should-run-the-codegen)
+  - [생성된 코드 확인](#생성된-코드-확인)
+- [이동](#이동)
+  - [다음 문서](#다음-문서)
+
 # GraphQL 코드 생성기
 
 참고
@@ -106,7 +127,7 @@ npx graphql-code-generator init
 npm install # install the chosen plugins
 ```
 
-#### 설정1) What type of application are you building?
+#### 설정1: What type of application are you building?
 
 사용하고자 하는 용도를 선택하면 된다. 백엔드 또는 프론트엔드
 프론트엔드라면 React, Stencil, Angular 등을 옵션에서 선택할 수 있다.
@@ -125,17 +146,19 @@ npm install # install the chosen plugins
  ( ) Application built with other framework or vanilla JS
 ```
 
-### 설정2) Where is your schema?
+#### 설정2: Where is your schema?
 
 스키마 위치를 설정한다. path 또는 url을 넣을 수 있는데, 백엔드가 스키마를 파일로 주면 path로 서버가 돌아가고 있으면 서버 url을 넣으면 된다.
 
 이 글에서는 Apollo Sever가 있기 때문에 서버 url인 `http://localhost:4000`으로 설정하였다.
 
-### 설정3) Where are your operations and fragments?
+#### 설정3: Where are your operations and fragments?
 
 프론트엔드에서 요청하는 작업을 작성한 Document 위치를 지정해야한다.
 Document는 Mutation, Query 등을 작성한 것을 말한다.
 이 글에서는 `src/gql` 경로에 존재하는데, Document의 경우 graphql 확장자를 가지기 때문에 기본으로 설정된 `src/**/*.graphql`을 활용해도 문제는 없다.
+
+-   `src/**/*.tsx` 형식으로 설정해서 Operations의 대상을 Tagged Template Literals로 지정할 수도 있다.
 
 ```gql
 # src/gql/toDo.graphql
@@ -158,7 +181,7 @@ mutation addTodo($title: String) {
 }
 ```
 
-### 설정4) Pick plugins
+#### 설정4: Pick plugins
 
 ```
 ? Pick plugins: (Press <space> to select, <a> to toggle all, <i> to invert selection, and <enter> to proceed)
@@ -171,16 +194,123 @@ mutation addTodo($title: String) {
  ( ) Urql Introspection (for Urql Client)
 ```
 
-### 설정5) ? Where to write the output
+#### 설정5: Where to write the output
 
-`src/generated/graphql.tsx`
+-   생성된 코드 파일 경로 및 이름 설정
+    -   `src/generated/graphql.tsx`
 
-### 설정6) Do you want to generate an introspection file?
+#### 설정6: Do you want to generate an introspection file?
 
-### 설정7) How to name the config file?
+-   introspection(스키마 확인) 시스템은 어떤 쿼리를 지원하는지에 대한 정보를 요청할 수 있다고 한다.
 
-`codegen.yml`
+#### 설정7: How to name the config file?
 
-### 설정8) What script in package.json should run the codegen?
+-   코드 생성기 설정 파일의 이름 설정
+    -   `codegen.yml`
 
-`gen`
+#### 설정8: What script in package.json should run the codegen?
+
+-   코드 생성에 대한 스크립트 명령어 설정
+    -   `gen`
+
+## 생성된 코드 확인
+
+-   쿼리
+
+```graphql
+query GetToDos {
+    toDos {
+        completed
+        id
+        title
+        userId
+    }
+}
+```
+
+-   생성된 코드
+    -   hook 형태로 코드 생성 및 타입 생성
+    -   생성된 hook을 잘보면, option을 추가할 수도 있다.
+
+```tsx
+export type GetToDosQuery = {
+    __typename?: 'Query';
+    toDos: Array<{
+        __typename?: 'Todo';
+        completed: boolean;
+        id: string;
+        title: string;
+        userId: number;
+    }>;
+};
+
+/**
+ * __useGetToDosQuery__
+ *
+ * To run a query within a React component, call `useGetToDosQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetToDosQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetToDosQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetToDosQuery(
+    baseOptions?: Apollo.QueryHookOptions<GetToDosQuery, GetToDosQueryVariables>
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useQuery<GetToDosQuery, GetToDosQueryVariables>(
+        GetToDosDocument,
+        options
+    );
+}
+export function useGetToDosLazyQuery(
+    baseOptions?: Apollo.LazyQueryHookOptions<
+        GetToDosQuery,
+        GetToDosQueryVariables
+    >
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useLazyQuery<GetToDosQuery, GetToDosQueryVariables>(
+        GetToDosDocument,
+        options
+    );
+}
+export type GetToDosQueryHookResult = ReturnType<typeof useGetToDosQuery>;
+export type GetToDosLazyQueryHookResult = ReturnType<
+    typeof useGetToDosLazyQuery
+>;
+export type GetToDosQueryResult = Apollo.QueryResult<
+    GetToDosQuery,
+    GetToDosQueryVariables
+>;
+export const AddTodoDocument = gql`
+    mutation addTodo($title: String) {
+        insertTodo(title: $title) {
+            completed
+            id
+            title
+            userId
+        }
+    }
+`;
+```
+
+-   활용
+
+```tsx
+const Example = () => {
+    const { data, loading, error } = useGetToDosQuery();
+    return <div>{data}</div>;
+};
+```
+
+# 이동
+
+## 다음 문서
+
+-   [Operation 작업을 VSCode에 통합시키기](./vscode.md)

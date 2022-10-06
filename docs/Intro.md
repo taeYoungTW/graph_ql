@@ -1,3 +1,11 @@
+- [참고](#참고)
+- [소개](#소개)
+  - [REST API 한계](#rest-api-한계)
+  - [GraphQL](#graphql)
+  - [예시](#예시)
+  - [특징](#특징)
+- [다음 문서](#다음-문서)
+
 # 참고
 
 -   [GraphQL이 등장하기 전 - REST API란? by 얄코](https://www.yalco.kr/@graphql-apollo/1-2/)
