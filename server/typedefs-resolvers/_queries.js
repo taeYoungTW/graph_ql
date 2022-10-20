@@ -9,6 +9,7 @@ const typeDefs = gql`
         videos: [Video]
         video(id: ID!): Video
         characters: [Character]
+        ping: String
     }
 `;
 
