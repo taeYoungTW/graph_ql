@@ -1,4 +1,5 @@
-import { ApolloServer } from '@apollo/server';
+// import { ApolloServer } from '@apollo/server';
+import { ApolloServer } from 'apollo-server-express';
 import queries from './typedefs-resolvers/_queries.js';
 import mutation from './typedefs-resolvers/_mutations.js';
 import books from './typedefs-resolvers/books.js';
@@ -16,6 +17,10 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import { expressMiddleware } from '@apollo/server/express4';
+import { SubscriptionServer } from 'subscriptions-transport-ws';
+import { execute, subscribe } from 'graphql';
+import { subsTransportWsServer } from './subVersion/subs-transport-ws.js';
+import { graphqlWsServer } from './subVersion/graphql-ws.js';
 
 const typeDefs = [
     queries,
@@ -36,47 +41,11 @@ const resolvers = [
     _enum.resolvers,
     _interface.resolvers,
 ];
-const app = express();
-const httpServer = createServer(app);
 const schema = makeExecutableSchema({ typeDefs, resolvers });
-// Creating the WebSocket server
-const wsServer = new WebSocketServer({
-    // This is the `httpServer` we created in a previous step.
-    server: httpServer,
-    // Pass a different path here if app.use
-    // serves expressMiddleware at a different path
-    path: '/graphql',
-});
 
-// Hand in the schema we just created and have the
-// WebSocketServer start listening.
-const serverCleanup = useServer({ schema }, wsServer);
-const server = new ApolloServer({
-    schema,
-    plugins: [
-        // Proper shutdown for the HTTP server.
-        ApolloServerPluginDrainHttpServer({ httpServer }),
+const callback = () => {
+    ping.publishFunc();
+};
 
-        // Proper shutdown for the WebSocket server.
-        {
-            async serverWillStart() {
-                return {
-                    async drainServer() {
-                        await serverCleanup.dispose();
-                    },
-                };
-            },
-        },
-    ],
-});
-
-ping.publishFunc();
-
-await server.start();
-app.use('/graphql', cors(), bodyParser.json(), expressMiddleware(server));
-
-const PORT = 4000;
-// Now that our HTTP server is fully set up, we can listen to it.
-httpServer.listen(PORT, () => {
-    console.log(`Server is now running on http://localhost:${PORT}/graphql`);
-});
+await subsTransportWsServer(schema, callback);
+// await graphqlWsServer(schema, callback);

@@ -4,6 +4,7 @@ import Client from './components/Client';
 import _Date from './components/Date';
 import GlobalState from './components/GlobalState';
 import { useState } from 'react';
+import SubExample from './components/SubExample';
 
 function App() {
     const [isOpen, setIsOpen] = useState(true);
@@ -22,6 +23,7 @@ function App() {
                 </a>
             </div>
             <h1>Vite + React + GraphQL(ApolloClient)</h1>
+            <SubExample />
             {isOpen && <GlobalState />}
             <button onClick={() => setIsOpen((prev) => !prev)}>toggle</button>
             <_Date />

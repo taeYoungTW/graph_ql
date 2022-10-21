@@ -97,6 +97,7 @@ export type Query = {
   books?: Maybe<Array<Maybe<Book>>>;
   characters?: Maybe<Array<Maybe<Character>>>;
   date: Dates;
+  ping?: Maybe<Scalars['String']>;
   toDo?: Maybe<Todo>;
   toDos: Array<Todo>;
   video?: Maybe<Video>;
@@ -116,6 +117,11 @@ export type QueryToDoArgs = {
 
 export type QueryVideoArgs = {
   id: Scalars['ID'];
+};
+
+export type Subscription = {
+  __typename?: 'Subscription';
+  messageAdded?: Maybe<Scalars['String']>;
 };
 
 export type Todo = {
@@ -144,6 +150,11 @@ export type GetCharactersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetCharactersQuery = { __typename?: 'Query', characters?: Array<{ __typename?: 'Hero', power: number, id: string, name: string, friends: Array<string | null> } | { __typename?: 'Human', job: string, id: string, name: string, friends: Array<string | null> } | null> | null };
+
+export type SubPingSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SubPingSubscription = { __typename?: 'Subscription', messageAdded?: string | null };
 
 export type GetToDosQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -250,6 +261,33 @@ export function useGetCharactersLazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
 export type GetCharactersQueryHookResult = ReturnType<typeof useGetCharactersQuery>;
 export type GetCharactersLazyQueryHookResult = ReturnType<typeof useGetCharactersLazyQuery>;
 export type GetCharactersQueryResult = Apollo.QueryResult<GetCharactersQuery, GetCharactersQueryVariables>;
+export const SubPingDocument = gql`
+    subscription SubPing {
+  messageAdded
+}
+    `;
+
+/**
+ * __useSubPingSubscription__
+ *
+ * To run a query within a React component, call `useSubPingSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useSubPingSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSubPingSubscription({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useSubPingSubscription(baseOptions?: Apollo.SubscriptionHookOptions<SubPingSubscription, SubPingSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<SubPingSubscription, SubPingSubscriptionVariables>(SubPingDocument, options);
+      }
+export type SubPingSubscriptionHookResult = ReturnType<typeof useSubPingSubscription>;
+export type SubPingSubscriptionResult = Apollo.SubscriptionResult<SubPingSubscription>;
 export const GetToDosDocument = gql`
     query GetToDos {
   toDos {
